@@ -18,6 +18,37 @@ you know better.
 
 [monorepo]: https://github.com/Thunderspies/CityOfHeroes
 
+# Dependencies
+
+The scripts fetch most dependencies. Runtime dependencies that must be
+installed separately include:
+
+## SQL Server
+
+https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+
+The character database is stored in SQL Server. Any version of SQL Server seems
+to work. LocalDB is a lighter version of SQL Server that is recommended for
+local testing and private use. Instructions to install and administrate SQL
+Server is outside the scope of this guide.
+
+* From the provided link, download the free SQL Server Express installer
+* During installation, choose "Custom"
+* Click through the default install wizard options until prompted for features
+* On the features page, uncheck everything and then choose "LocalDB"
+* Continue with defaults until installation is complete
+
+NOTE: If you're prompted for something about "Azure", just disable that too
+
+## ODBC17
+
+https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver17
+
+The ODBC driver is used by the game server to interface with the SQL Server.
+It's basically the bridge between the game and the database. [ODBC 17
+x86](https://go.microsoft.com/fwlink/?linkid=2361647) is the only driver that's
+supported. Just download and run the installer.
+
 # Usage
 
 To run a server and client locally, run
