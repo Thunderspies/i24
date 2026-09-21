@@ -1,7 +1,7 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-Starts DbServer, waits for it, starts MapServer, waits for it, then starts Game.
+Generates templates, starts DbServer, waits for it, starts MapServer, waits for it, then starts Game.
 .DESCRIPTION
 Uses the local launchers and the existing fakeauth configuration in servers.cfg.
 Readiness is detected from the servers' startup-complete messages. Output is
@@ -63,6 +63,8 @@ function Wait-ServerReady {
 }
 
 try {
+    & (Join-Path $PSScriptRoot 'templates.ps1')
+
     $servers += & (Join-Path $PSScriptRoot 'db.ps1') -LogDirectory $logDirectory -PassThru
     Wait-ServerReady -Name 'DbServer' -LogPath (Join-Path $logDirectory 'db.stderr.log') `
         -ReadyMessage 'DbServer Ready.'

@@ -15,6 +15,7 @@ you know better.
 
 1. Execute [fetch_release.ps1](tools/fetch_release.ps1)
 2. Execute [fetch_data.ps1](tools/fetch_data.ps1)
+3. Execute [templates.ps1](tools/templates.ps1)
 
 [monorepo]: https://github.com/Thunderspies/CityOfHeroes
 
@@ -57,6 +58,18 @@ configured to run with "fakeauth" in [servers.cfg](data/server/db/servers.cfg).
 In fakeauth mode, any username and password may be used to log into the shard.
 With a mapserver running in local mode, characters will always zone into that
 mapserver when they're created or log in.
+
+## Database Templates and Schema
+
+The DbServer manages its own SQL database for character and supergroup data.
+However, the schema depends on data that is not processed by the DbServer.
+Since the MapServer loads and processes all of the data necessary to generate
+the database schema, it must first be run with `MapServer -templates` to create
+teplate files that are then used by DbServer to create or revise the character
+databse in SQL. This step must be repeated whenever data is changed or the way
+that the MapServer loads or processes data changes. The `templates.ps1` script
+can be explicity called to simplift this step, but it's also implicitly called
+by `start-local.ps1` before the DbServer starts.
 
 ## Creating Data Bins
 
